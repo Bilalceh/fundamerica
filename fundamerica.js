@@ -93,6 +93,16 @@ var querystring = require('querystring');
         request.end();
     }
 
+    function _patch(path, data, cb){
+        var dstr = querystring.stringify(data);
+        var opts = _getRequestOptions(path + "?" + dstr);
+        opts.method = "PATCH";
+
+        var request = https.request(opts, _requestCallback(cb));
+
+        request.end();
+    }
+    
     function _delete(path, cb){
         var opts = _getRequestOptions(path);
         opts.method = "DELETE";
